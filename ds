@@ -1,0 +1,2357 @@
+1.stack operations using array.
+
+#include <stdio.h>
+#define MAXSIZE 5
+ 
+struct stack
+{
+    int stk[MAXSIZE];
+    int top;
+};
+typedef struct stack STACK;
+STACK s;
+ 
+void push(void);
+int  pop(void);
+void display(void);
+ void main ()
+{
+    int choice;
+    int option = 1;
+    s.top = -1;
+     printf ("STACK OPERATION\n");
+    while (option)
+    {
+        printf ("------------------------------------------\n");
+        printf ("      1    -->    PUSH               \n");
+        printf ("      2    -->    POP               \n");
+        printf ("      3    -->    DISPLAY               \n");
+        printf ("      4    -->    EXIT           \n");
+        printf ("------------------------------------------\n");
+        printf ("Enter your choice\n");
+        scanf    ("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            push();
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            return;
+        }
+        fflush (stdin);
+        printf ("Do you want to continue(Type 0 or 1)?\n");
+        scanf    ("%d", &option);
+    }
+}
+/*  Function to add an element to the stack */
+void push ()
+{
+    int num;
+    if (s.top == (MAXSIZE - 1))
+    {
+        printf ("Stack is Full\n");
+        return;
+    }
+    else
+    {
+        printf ("Enter the element to be pushed\n");
+        scanf ("%d", &num);
+        s.top = s.top + 1;
+        s.stk[s.top] = num;
+    }
+    return;
+}
+/*  Function to delete an element from the stack */
+int pop ()
+{
+    int num;
+    if (s.top == - 1)
+    {
+        printf ("Stack is Empty\n");
+        return (s.top);
+    }
+    else
+    {
+        num = s.stk[s.top];
+        printf ("poped element is = %dn", s.stk[s.top]);
+        s.top = s.top - 1;
+    }
+    return(num);
+}
+/*  Function to display the status of the stack */
+void display ()
+{
+    int i;
+    if (s.top == -1)
+    {
+        printf ("Stack is empty\n");
+        return;
+    }
+    else
+    {
+        printf ("\n The status of the stack is \n");
+        for (i = s.top; i >= 0; i--)
+        {
+            printf ("%d\n", s.stk[i]);
+        }
+    }
+    printf ("\n");
+}
+Output
+
+STACK OPERATION
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+1
+Enter the element to be pushed
+34
+Do you want to continue(Type 0 or 1)?
+0
+$ a.out
+STACK OPERATION
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+1
+Enter the element to be pushed
+34
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+2
+poped element is = 34
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+3
+Stack is empty
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+1
+Enter the element to be pushed
+50
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+1
+Enter the element to be pushed
+60
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+3
+ 
+The status of the stack is
+60
+50
+ 
+Do you want to continue(Type 0 or 1)?
+1
+------------------------------------------
+      1    -->    PUSH
+      2    -->    POP
+      3    -->    DISPLAY
+      4    -->    EXIT
+------------------------------------------
+Enter your choice
+4
+ 
+
+2.Queue Operation using Arrays
+
+#include <stdio.h>
+#define MAX 50
+void insert();
+void delete();
+void display();
+int queue_array[MAX];
+int rear = - 1;
+int front = - 1;
+main()
+{
+    int choice;
+    while (1)
+    {
+        printf("1.Insert element to queue \n");
+        printf("2.Delete element from queue \n");
+        printf("3.Display all elements of queue \n");
+        printf("4.Quit \n");
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+            case 1:
+            insert();
+            break;
+            case 2:
+            delete();
+            break;
+            case 3:
+            display();
+            break;
+            case 4:
+            exit(1);
+            default:
+            printf("Wrong choice \n");
+        } /* End of switch */
+    } /* End of while */
+} /* End of main() */
+ 
+void insert()
+{
+    int add_item;
+    if (rear == MAX - 1)
+    printf("Queue Overflow \n");
+    else
+    {
+        if (front == - 1)
+        /*If queue is initially empty */
+        front = 0;
+        printf("Inset the element in queue : ");
+        scanf("%d", &add_item);
+        rear = rear + 1;
+        queue_array[rear] = add_item;
+    }
+} /* End of insert() */
+ 
+void delete()
+{
+    if (front == - 1 || front > rear)
+    {
+        printf("Queue Underflow \n");
+        return ;
+    }
+    else
+    {
+  printf("Element deleted from queue is : %d\n", queue_array[front]);
+        front = front + 1;
+    }
+} /* End of delete() */
+ 
+void display()
+{
+    int i;
+    if (front == - 1)
+        printf("Queue is empty \n");
+    else
+    {
+        printf("Queue is : \n");
+        for (i = front; i <= rear; i++)
+            printf("%d ", queue_array[i]);
+        printf("\n");
+    }
+}
+
+
+OUTPUT
+
+1.Insert element to queue 
+2.Delete element from queue 
+3.Display all elements of queue 
+4.Quit
+Enter your choice:1
+Insert the element in Queue: 3
+1.Insert element to queue 
+2.Delete element from queue 
+3.Display all elements of queue 
+4.Quit
+Enter your choice:1
+Insert the element in Queue: 6
+1.Insert element to queue 
+2.Delete element from queue 
+3.Display all elements of queue 
+4.Quit
+Enter your choice:2
+Element deleted from queue is: 3
+1.Insert element to queue 
+2.Delete element from queue 
+3.Display all elements of queue 
+4.Quit
+Enter your choice:3
+Queue is:6
+1.Insert element to queue 
+2.Delete element from queue 
+3.Display all elements of queue 
+4.Quit
+Enter your choice:4
+
+
+3.various operations on List ADT using array implementation.
+
+#include <stdio.h>
+#include <conio.h>
+
+void create();
+void insert();
+void search();
+void deletion();
+void display();
+
+int i, e, n, pos;
+static int b[50];
+
+main()
+{
+int ch;
+char g = 'y';
+create();
+do
+{
+printf("\n List Operations");
+printf("\n 1.Deletion\n 2.Insert\n 3.Search\n
+4.Exit\n");
+printf("Enter your choice: ");
+scanf("%d", &ch);
+switch(ch)
+{
+case 1:
+deletion();break;
+case 2:
+insert();break;
+case 3:
+search();break;
+case 4:
+exit(0);
+default:
+printf("\n Enter the correct choice:");
+}
+printf("Do you want to continue: ");
+fflush(stdin);
+scanf("\n %c",&g);
+} while(g=='y' || g=='Y'); getch();
+}
+
+void create()
+{
+
+printf("\n Enter the number of elements:"); scanf("%d",&n);
+
+printf("\n Enter list elements: "); for(i=0; i<n; i++)
+scanf("%d", &b[i]);
+}
+
+void deletion()
+{
+printf("\n enter the position you want to delete: ");
+scanf("%d", &pos);
+if(pos >= n)
+printf("\n Invalid location");
+else
+{
+for(i=pos+1; i<n; i++)
+b[i-1] = b[i];
+n--;
+
+printf("List elements after deletion"); display();
+}
+}
+
+void search()
+{
+int flag = 0;
+printf("\n Enter the element to be searched: ");
+scanf("%d", &e);
+for(i=0; i<n; i++)
+{
+if(b[i] == e)
+{
+flag = 1;
+printf("Element is in the %d position", i); break;
+}
+}
+if(flag == 0)
+printf("Value %d is not in the list", e);
+}
+
+void insert()
+{
+printf("\n Enter the position you need to insert: ");
+scanf("%d", &pos);
+if(pos >= n)
+printf("\n Invalid location");
+else
+{
+++n;
+for(i=n; i>pos; i--)
+b[i] = b[i-1];
+printf("\n Enter the element to insert: ");
+scanf("%d", &e);
+b[pos] = e;
+}
+printf("\n List after insertion:"); display();
+}
+
+void display()
+{
+for(i=0; i<n; i++)
+printf("\n %d", b[i]);
+}
+Output
+
+Enter the number of elements:5 Enter list elements: 12 23 34 45 56
+List Operations
+1.Deletion
+2.Insert
+3.Search
+4.Exit
+Enter your choice:2
+Enter the position you need to insert: 1
+Enter the element to insert: 99
+List after insertion:
+12
+99
+23
+34
+45
+56
+Do you want to continue: y
+List Operations
+1.Deletion
+2.Insert
+3.Search
+4.Exit
+Enter your choice:1
+Enter the position you want to delete: 3
+Elements after deletion
+12
+99
+23
+45
+56
+Do you want to continue: n
+
+4 Single Linked List
+
+#include <stdio.h>
+#include <conio.h>
+#include <process.h>
+#include <alloc.h>
+#include <string.h>
+
+struct node
+{
+int label;
+struct node *next;
+};
+
+main()
+{
+int ch, fou=0;
+int k;
+struct node *h, *temp, *head, *h1;
+/* Head node construction */
+head = (struct node*) malloc(sizeof(struct node));
+head->label = -1;
+head->next = NULL;
+while(-1)
+{
+clrscr();
+printf("\n\n SINGLY LINKED LIST OPERATIONS \n");
+printf("1->Add	");
+printf("2->Delete	");
+printf("3->View	");
+printf("4->Exit \n");
+printf("Enter your choice : ");
+scanf("%d", &ch);
+switch(ch)
+{
+/* Add a node at any intermediate location */ case 1:
+printf("\n Enter label after which to add : "); scanf("%d", &k);
+h = head;
+fou = 0;
+if (h->label == k)
+fou = 1;
+while(h->next != NULL)
+{
+if (h->label == k)
+{
+fou=1;
+break;
+}
+h = h->next;
+}
+if (h->label == k)
+fou = 1;
+if (fou != 1)
+printf("Node not found\n");
+else
+{
+temp=(struct node *)(malloc(sizeof(struct node))); printf("Enter label for new node : "); scanf("%d", &temp->label);
+temp->next = h->next;
+h->next = temp;
+}
+break;
+/* Delete any intermediate node */
+case 2:
+printf("Enter label of node to be deleted\n");
+scanf("%d", &k);
+fou = 0;
+h = h1 = head;
+while (h->next != NULL)
+{
+h = h->next;
+if (h->label == k)
+{
+fou = 1;
+break;
+}
+}
+if (fou == 0)
+printf("Sorry Node not found\n"); else
+{
+while (h1->next != h)
+h1 = h1->next;
+h1->next = h->next;
+free(h);
+printf("Node deleted successfully \n");
+}
+break;
+case 3:
+printf("\n\n HEAD -> ");
+h=head;
+while (h->next != NULL)
+{
+h = h->next;
+printf("%d -> ",h->label);
+}
+printf("NULL");
+break;
+
+case 4:
+exit(0);
+}}}
+
+
+Output			
+SINGLY LINKED LIST	OPERATIONS
+1->Add  2->Delete	3->View	4->Exit
+Enter	your choice	: 1	
+Enter	label after	which new node is to be added : -1
+Enter	label for new node : 23
+SINGLY LINKED LIST	OPERATIONS
+1->Add  2->Delete	3->View	4->Exit
+Enter	your choice	: 1	
+Enter	label after	which new node is to be added : 23
+Enter	label for new node : 67
+SINGLY LINKED LIST	OPERATIONS
+1->Add  2->Delete	3->View	4->Exit
+Enter	your choice	: 3	
+HEAD	-> 23 -> 67	-> NULL	
+
+
+5 Stack using Single Linked List
+
+#include <stdio.h>
+#include <conio.h>
+#include <process.h>
+#include <alloc.h>
+struct node
+{
+int label;
+struct node *next;
+};
+main()
+{
+int ch = 0;
+int k;
+struct node *h, *temp, *head;
+/* Head node construction */
+head = (struct node*) malloc(sizeof(struct node)); head->next = NULL;
+while(1)
+{
+printf("\n Stack using Linked List \n");
+printf("1->Push	");
+printf("2->Pop	");
+printf("3->View	");
+printf("4->Exit \n");
+printf("Enter your choice : ");
+scanf("%d", &ch);
+switch(ch)
+{
+case 1:
+	/* Create a new node */	
+	temp=(struct node *)(malloc(sizeof(struct node)));	
+	printf("Enter label for new node : ");	
+	scanf("%d", &temp->label);	
+	h = head;	
+	temp->next = h->next;	
+	h->next = temp;	
+	break;	
+case 2:	
+	/* Delink the first node */	
+	h = head->next;	
+	head->next = h->next;	
+
+printf("Node %s deleted\n", h->label);
+free(h);
+break;
+
+case 3:
+printf("\n HEAD -> ");
+h = head;
+/* Loop till last node */
+while(h->next != NULL)
+{
+h = h->next;
+printf("%d -> ",h->label);
+}
+printf("NULL \n");
+break;
+
+case 4:
+exit(0);
+}}}
+
+Output
+Stack using Linked List
+1->Push	2->Pop	3->View	4->Exit
+Enter	your choice :	1
+Enter	label for new	node : 23
+New node added	
+Stack using Linked	List
+1->Push  2->Pop	3->View  4->Exit
+Enter your	choice :	1
+Enter label for new	node : 34
+Stack using Linked	List
+1->Push  2->Pop	3->View  4->Exit
+Enter your	choice :	3
+HEAD -> 34	-> 23	->	NULL
+
+
+6 Queue using Single Linked List 
+
+#include <stdio.h>
+#include <conio.h>
+#include <process.h>
+#include <alloc.h>
+
+struct node
+{
+int label;
+struct node *next;
+};
+main()
+{
+int ch=0;
+int k;
+struct node *h, *temp, *head;
+/* Head node construction */
+head = (struct node*) malloc(sizeof(struct ode)); head->next = NULL;
+while(1)
+{
+printf("\n Queue using Linked List \n");
+printf("1->Insert	");
+printf("2->Delete	");
+printf("3->View	");
+printf("4->Exit \n");
+printf("Enter your choice : ");
+scanf("%d", &ch);
+switch(ch)
+{
+case 1:
+/* Create a new node */
+temp=(struct node *)(malloc(sizeof(struct node))); printf("Enter label for new node : "); scanf("%d", &temp->label);
+/* Reorganize the links */
+h = head;
+while (h->next != NULL)
+h= h->next; h->next = temp; temp->next= NULL;
+ break;
+case 2:
+/* Delink the first node */
+h = head->next;
+head->next = h->next;
+printf("Node deleted \n");
+free(h);
+break;
+case 3:
+printf("\n\nHEAD -> ");
+h=head;
+while (h->next!=NULL)
+{
+h = h->next;
+printf("%d -> ",h->label);
+}
+printf("NULL \n");
+break;
+case 4:
+exit(0);
+}}}
+Output		
+Queue using Linked	List
+1->Insert	2->Delete  3->View  4->Exit
+Enter your	choice :	1
+Enter label for new	node : 12
+Queue using Linked	List
+1->Insert	2->Delete  3->View  4->Exit
+Enter your	choice :	1
+Enter label for new	node : 23
+Queue using Linked	List
+1->Insert	2->Delete  3->View  4->Exit
+Enter your	choice :	3
+HEAD -> 12	-> 23 ->	NULL
+		
+
+
+
+
+7  Conversion of infix to postfix expression
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#define MAX 20
+
+int top = -1;
+char stack[MAX];
+char pop();
+void push(char item);
+int prcd(char symbol)
+{
+switch(symbol)
+{
+case '+':
+case '-':
+return 2;break;
+case '*':
+case '/':
+return 4;break;
+case '^':
+case '$':
+return 6;break;
+case '(':
+case ')':
+case '#':
+return 1;break;
+}
+}
+
+int isoperator(char symbol)
+{
+switch(symbol)
+{
+case '+':
+case '-':
+case '*':
+case '/':
+case '^':
+case '$':
+case '(':
+case ')':
+return 1;break;
+default:
+return 0;
+}
+}
+void convertip(char infix[],char postfix[])
+{
+int i,symbol,j = 0;
+stack[++top] = '#';
+for(i=0;i<strlen(infix);i++)
+{
+symbol = infix[i];
+if(isoperator(symbol) == 0)
+{
+postfix[j] = symbol;
+j++;
+}
+else
+{
+if(symbol == '(')
+push(symbol);
+else if(symbol == ')')
+{
+while(stack[top] != '(')
+{
+postfix[j] = pop();
+j++;
+}
+pop(); //pop out (.
+}
+else
+{
+if(prcd(symbol) > prcd(stack[top]))
+push(symbol);
+else
+{
+while(prcd(symbol) <= prcd(stack[top]))
+{
+postfix[j] = pop();
+j++;
+}
+push(symbol);
+}}}}
+while(stack[top] != '#')
+{
+postfix[j] = pop();
+j++;
+}
+postfix[j] = '\0';
+}
+
+main()
+{
+char infix[20],postfix[20];
+clrscr();
+printf("Enter the valid infix string: ");
+gets(infix);
+convertip(infix, postfix);
+printf("The corresponding postfix string is: ");
+puts(postfix);
+getch();
+}
+void push(char item)
+{
+top++;
+stack[top] = item;
+}
+char pop()
+{
+char a;
+a = stack[top];
+top--;
+return a;
+}
+
+Output
+
+Enter the valid infix string: (a+b*c)/(d$e)
+The corresponding postfix string is: abc*+de$/
+
+Enter the valid infix string: a*b+c*d/e
+The corresponding postfix string is: ab*cd*e/+
+
+Enter the valid infix string: a+b*c+(d*e+f)*g
+The corresponding postfix string is: abc*+de*f+g*+
+
+9 Evaluation of Postfix expression using stack
+
+
+#include <stdio.h>
+#include <conio.h>
+
+struct stack
+{
+int top;
+float a[50];
+}s;
+main()
+{
+char pf[50];
+float d1,d2,d3;
+int i;
+clrscr();
+
+s.top = -1;
+
+printf("\n\n Enter the postfix expression: "); gets(pf);
+for(i=0; pf[i]!='\0'; i++)
+{
+switch(pf[i])
+{
+case '0':
+case '1':
+case '2':
+case '3':
+case '4':
+case '5':
+case '6':
+case '7':
+case '8':
+case '9':
+s.a[++s.top] = pf[i]-'0';
+break;
+
+case '+':
+d1 = s.a[s.top--];
+d2 = s.a[s.top--];
+s.a[++s.top] = d1 + d2;
+break;
+case '-':
+d2 = s.a[s.top--];
+d1 = s.a[s.top--];
+s.a[++s.top] = d1 - d2;
+break;
+case '*':
+d2	= s.a[s.top--];
+d1	= s.a[s.top--];
+s.a[++s.top] = d1*d2;
+break;
+case '/':
+d2	= s.a[s.top--];
+d1	= s.a[s.top--];
+s.a[++s.top] = d1 / d2;
+break;
+}
+}
+printf("\n Expression value is %5.2f", s.a[s.top]); getch();
+}
+
+
+
+Output
+
+Enter the postfix expression: 6523+8*+3+* Expression value is 288.00
+
+
+
+10 different types of traversal for the given binary tree.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node
+{
+int data;
+struct node *left;
+struct node *right;
+}node;
+int count=1;
+node *insert(node *tree,int digit)
+{
+if(tree == NULL)
+{
+tree = (node *)malloc(sizeof(node)); tree->left = tree->right=NULL; tree->data = digit; 
+count++;
+}
+else if(count%2 == 0)
+
+tree->left = insert(tree->left, digit); else
+tree->right = insert(tree->right, digit); return tree;
+}
+void preorder(node *t)
+{
+if(t != NULL)
+{
+printf(" %d", t->data);
+preorder(t->left);
+preorder(t->right);
+}}
+void postorder(node *t)
+{
+if(t != NULL)
+{
+postorder(t->left);
+postorder(t->right);
+printf(" %d", t->data);
+}}
+void inorder(node *t)
+{
+if(t != NULL)
+{
+inorder(t->left);
+printf(" %d", t->data);
+inorder(t->right);
+}}
+main()
+{
+node *root = NULL;
+int digit;
+puts("Enter integer:To quit enter 0");
+scanf("%d", &digit); 
+while(digit != 0)
+{
+root=insert(root,digit);
+scanf("%d",&digit);
+}
+printf("\nThe preorder traversal of tree is:\n"); preorder(root);
+printf("\nThe inorder traversal of tree is:\n"); inorder(root);
+printf("\nThe postorder traversal of tree is:\n");
+postorder(root);
+getch();
+}
+
+Output
+Enter integer:To quit enter 0
+1246914173190
+The preorder traversal of tree is:
+124917196143
+The inorder traversal of tree is:
+191794126143
+The postorder traversal of tree is:
+191794314612
+
+11  insert and delete nodes in a binary search tree.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+int key;
+struct node *left;
+struct node *right;
+};
+struct node *newNode(int item)
+{
+struct node *temp = (struct node *)malloc(sizeof(struct node));
+temp->key = item;
+temp->left = temp->right = NULL;
+return temp;
+}
+void inorder(struct node *root)
+{
+if (root != NULL)
+{
+inorder(root->left);
+printf("%d ", root->key);
+inorder(root->right);
+}
+}
+struct node* insert(struct node* node, int key)
+{
+if (node == NULL)
+return newNode(key);
+if (key < node->key)
+node->left = insert(node->left, key); else
+node->right = insert(node->right, key); return node;
+}
+struct node * minValueNode(struct node* node)
+{
+struct node* current = node;
+while (current->left != NULL)
+current = current->left;
+return current;
+}
+struct node* deleteNode(struct node* root, int key)
+{
+struct node *temp;
+if (root == NULL)
+return root;
+if (key < root->key)
+
+root->left = deleteNode(root->left, key); else if (key > root->key)
+root->right = deleteNode(root->right, key);
+else
+{
+if (root->left == NULL)
+{
+temp = root->right;
+free(root);
+return temp;
+}
+else if (root->right == NULL)
+{
+temp = root->left;
+free(root);
+return temp;
+}
+temp = minValueNode(root->right);
+root->key = temp->key;
+root->right = deleteNode(root->right, temp->key);
+}			
+return	root;		
+}			
+main()			
+{			
+struct	node *root = NULL;		
+root =	insert(root, 50);		
+root =	insert(root, 30);		
+root =	insert(root, 20);		
+root =	insert(root, 40);		
+root =	insert(root, 70);		
+root =	insert(root, 60);		
+root =	insert(root, 80);		
+printf("Inorder traversal of the given tree \n");	
+inorder(root);		
+printf("\nDelete 20\n");		
+root =	deleteNode(root, 20);		
+printf("Inorder traversal of the modified tree \n");	
+inorder(root);		
+printf("\nDelete 30\n");		
+root =	deleteNode(root, 30);		
+printf("Inorder traversal of the modified tree \n");	
+inorder(root);		
+printf("\nDelete 50\n");		
+root = deleteNode(root, 50);	
+printf("Inorder traversal of the modified tree \n");	
+inorder(root);	
+}	
+
+
+Output
+
+Inorder traversal of the given tree 20 30 40 50 60 70 80 Delete 20
+Inorder traversal of the modified tree
+30 40 50 60 70 80
+Delete 30
+Inorder traversal of the modified tree
+40 50 60 70 80
+Delete 50
+
+Inorder traversal of the modified tree 40 60 70 80
+
+
+
+
+
+12  insertion operation on an AVL tree and to maintain balance factor.
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <malloc.h>
+#include <stdlib.h>
+
+#define CHANGED 0
+#define BALANCED 1
+
+typedef struct bnode
+{
+int data,bfactor;
+struct bnode *left;
+struct bnode *right;
+}node;
+
+int height;
+
+void displaymenu()
+{
+
+printf("\nBasic Operations in AVL tree"); printf("\n0.Display menu list"); printf("\n1.Insert a node in AVL tree"); printf("\n2.View AVL tree"); printf("\n3.Exit");
+}
+
+node* getnode()
+{
+int size;
+node *newnode;
+size = sizeof(node);
+newnode = (node*)malloc(size);
+return(newnode);
+}
+
+void copynode(node *r, int data)
+{
+r->data = data;
+r->left = NULL;
+r->right = NULL;
+r->bfactor = 0;
+}
+
+void releasenode(node *p)
+{
+free(p);
+}
+
+node* searchnode(node *root, int data)
+{
+if(root!=NULL)
+if(data < root->data)
+
+root = searchnode(root->left, data); else if(data > root->data)
+
+root = searchnode(root->right, data); return(root);
+}
+
+void lefttoleft(node **pptr, node **aptr)
+{
+
+node *p = *pptr, *a = *aptr; printf("\nLeft to Left AVL rotation"); p->left = a->right; a->right = p;
+if(a->bfactor == 0)
+{
+p->bfactor = 1;
+a->bfactor = -1;
+height = BALANCED;
+}
+else
+{
+p->bfactor = 0;
+a->bfactor = 0;
+}
+p = a;
+*pptr = p;
+*aptr = a;
+}
+
+void lefttoright(node **pptr, node **aptr, node **bptr)
+{
+
+node *p = *pptr, *a = *aptr, *b = *bptr; printf("\nLeft to Right AVL rotation");
+
+b= a->right; b->right = p; if(b->bfactor == 1)
+p->bfactor = -1; else
+p->bfactor = 0; if(b->bfactor == -1)
+ a->bfactor = 1;
+else
+
+a->bfactor = 1; b->bfactor = 0;
+
+p = b; *pptr = p; *aptr = a; *bptr = b;
+
+}
+
+void righttoright(node **pptr, node **aptr)
+{
+node *p = *pptr, *a = *aptr;
+printf("\nRight to Right AVL rotation");
+p->right = a->left;
+a->left = p;
+if(a->bfactor == 0)
+{
+p->bfactor = -1;
+a->bfactor = 1;
+height = BALANCED;
+}
+else
+{
+p->bfactor = 0;
+a->bfactor = 0;
+}
+p = a;
+*pptr = p;
+*aptr = a;
+}
+
+void righttoleft(node **pptr, node **aptr, node **bptr)
+{
+node *p = *pptr, *a = *aptr, *b = *bptr;
+printf("\nRight to Left AVL rotation");
+b = a->left;
+a->left = b->right;
+b->right = a;
+p->right = b->left;
+b->left = p;
+if(b->bfactor == -1)
+p->bfactor = 1;
+else
+p->bfactor = 0;
+if(b->bfactor == -1)
+a->bfactor = 0;
+b->bfactor = 0;
+p = b;
+*pptr = p;
+*aptr = a;
+*bptr = b;
+}
+
+void inorder(node *root)
+{
+if(root == NULL)
+return;
+inorder(root->left);
+
+printf("\n%4d", root->data);
+inorder(root->right);
+}
+
+void view(node *root, int level)
+{
+int k;
+if(root == NULL)
+return;
+view(root->right, level+1);
+printf("\n");
+for(k=0; k<level; k++)
+printf("	");
+printf("%d", root->data);
+view(root->left, level+1);
+}
+
+node* insertnode(int data, node *p)
+{
+node *a,*b;
+if(p == NULL)
+{
+p=getnode();
+copynode(p, data);
+height = CHANGED;
+return(p);
+}
+if(data < p->data)
+{
+
+p->left = insertnode(data, p->left); if(height == CHANGED) {
+
+switch(p->bfactor)
+{
+case -1:
+p->bfactor = 0;
+height = BALANCED;
+break;
+case 0:
+p->bfactor = 1;
+break;
+case 1:
+a = p->left;
+if(a->bfactor == 1)
+lefttoleft(&p, &a);
+else
+lefttoright(&p, &a, &b);
+height = BALANCED;
+break;
+}
+}
+
+}
+if(data > p->data)
+{
+
+p->right = insertnode(data, p->right); if(height == CHANGED) {
+
+switch(p->bfactor)
+{
+case 1:
+p->bfactor = 0;
+height = BALANCED;
+break;
+case 0:
+p->bfactor = -1;
+break;
+case -1:
+a=p->right;
+if(a->bfactor == -1)
+righttoright(&p, &a);
+else
+righttoleft(&p, &a, &b);
+height=BALANCED;
+break;
+}
+}
+}
+return(p);
+}
+
+main()
+{
+int data, ch;
+char choice = 'y';
+node *root = NULL;
+clrscr();
+displaymenu();
+while((choice == 'y') || (choice == 'Y'))
+{
+printf("\nEnter your choice: ");
+fflush(stdin);
+scanf("%d",&ch);
+switch(ch)
+{
+case 0:
+displaymenu();
+break;
+case 1:
+printf("Enter the value to be inserted ");
+	scanf("%d", &data);			
+	if(searchnode(root,	data) == NULL)	
+	root = insertnode(data, root);	
+else
+printf("\nData already exists");
+break;
+case 2:
+if(root == NULL)
+{
+printf("\nAVL tree is empty");
+continue;
+}
+printf("\nInorder traversal of AVL tree");
+inorder(root);
+printf("\nAVL tree is");
+view(root, 1);
+break;
+case 3:
+releasenode(root);
+exit(0);
+}
+}
+getch();
+}
+
+Output
+
+Basic Operations in AVL tree
+0.Display	menu list	
+1.Insert a	node in	AVL tree
+2.View AVL	tree	
+3.Exit			
+Enter your	choice:	1
+Enter the	value to	be inserted 1
+Enter your	choice:	1
+Enter the	value to	be inserted 2
+Enter your	choice:	1
+Enter the	value to	be inserted 3
+Right to Right AVL	rotation
+Enter your	choice:	1
+Enter the	value to	be inserted 4
+Enter your	choice:	1
+Enter the	value to	be inserted 5
+
+Right to Right AVL rotation
+
+
+
+
+
+Enter your choice: 1
+Enter the value to be inserted 6
+
+Right to Right AVL rotation
+
+Enter your choice: 1
+Enter the value to be inserted 7
+
+Right to Right AVL rotation
+
+Enter your choice: 1
+Enter the value to be inserted 8
+
+Enter your choice: 2
+Inorder traversal of AVL tree
+1
+2
+3
+4
+5
+6
+7
+8
+AVL tree is
+8
+7
+6
+5
+4
+3
+2
+1
+Enter your choice: 3
+
+
+
+
+
+13  build a binary heap from an array of input elements.
+
+
+#include <stdio.h>
+#include <limits.h>
+
+int heap[1000000], heapSize;
+void Init()
+{
+heapSize = 0;
+heap[0] = -INT_MAX;
+}
+
+void Insert(int element)
+{
+heapSize++;
+heap[heapSize] = element;
+int now = heapSize;
+while (heap[now / 2] > element)
+{
+heap[now] = heap[now / 2];
+now /= 2;
+}
+heap[now] = element;
+}
+
+int DeleteMin()
+{
+
+int minElement, lastElement, child, now; minElement = heap[1]; lastElement = heap[heapSize--];
+for (now = 1; now * 2 <= heapSize; now = child)
+{
+child = now * 2;
+if (child != heapSize && heap[child + 1] < heap[child])
+child++;
+if (lastElement > heap[child])
+heap[now] = heap[child];
+else
+break;
+}
+heap[now] = lastElement;
+return minElement;
+}
+
+main()
+{
+int number_of_elements;
+printf("Program to demonstrate Heap:\nEnter the number of
+elements: ");
+scanf("%d", &number_of_elements);
+int iter, element;
+Init();
+printf("Enter the elements: ");
+for (iter = 0; iter < number_of_elements; iter++)
+{
+scanf("%d", &element);
+Insert(element);
+}
+for (iter = 0; iter < number_of_elements; iter++)
+printf("%d ", DeleteMin());
+printf("\n");
+}
+
+
+Output
+
+Program to demonstrate Heap:
+Enter the number of elements: 6
+Enter the elements: 3 2 15 5 4 45
+
+23451545
+
+
+
+14    create adjacency matrix of the given graph and to perform breadth first search 
+Graph Traversal
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+#define initial 1
+#define waiting 2
+#define visited 3
+
+int n;
+int adj[MAX][MAX];
+int state[MAX];
+void create_graph();
+void BF_Traversal();
+void BFS(int v);
+int queue[MAX], front = -1,rear = -1; void insert_queue(int vertex); int delete_queue();
+int isEmpty_queue();
+int main()
+{
+create_graph();
+BF_Traversal();
+return 0;
+}
+void BF_Traversal()
+{
+int v;
+for(v=0; v<n; v++)
+state[v] = initial;
+printf("Enter Start Vertex for BFS: ");
+scanf("%d", &v);
+BFS(v);
+}
+void BFS(int v)
+{
+int i;
+insert_queue(v);
+state[v] = waiting;
+printf("BFS Traversal : ");
+while(!isEmpty_queue())
+{
+v = delete_queue( );
+
+printf("%d ", v);
+state[v] = visited;
+for(i=0; i<n; i++)
+{
+if(adj[v][i] == 1 && state[i] == initial)
+{
+insert_queue(i);
+state[i] = waiting;
+}
+}
+}
+printf("\n");
+}
+void insert_queue(int vertex)
+{
+if(rear == MAX-1)
+printf("Queue Overflow\n");
+else
+{
+if(front == -1)
+front = 0;
+rear = rear+1;
+queue[rear] = vertex ;
+}
+}
+int isEmpty_queue()
+{
+if(front == -1 || front > rear)
+return 1;
+else
+return 0;
+}
+
+int delete_queue()
+{
+int delete_item;
+if(front == -1 || front > rear)
+{
+printf("Queue Underflow\n");
+exit(1);
+}
+delete_item = queue[front];
+front = front+1;
+return delete_item;
+}
+void create_graph()
+{
+int count,max_edge,origin,destin;
+
+printf("Enter number of vertices : "); scanf("%d", &n);
+max_edge = n * (n-1);
+for(count=1; count<=max_edge; count++)
+{
+printf("Enter edge %d( -1 -1 to quit ) : ",count); scanf("%d %d", &origin, &destin); if((origin == -1) && (destin == -1))
+break;
+if(origin>=n || destin>=n || origin<0 || destin<0)
+{
+printf("Invalid edge!\n");
+count--;
+}
+else
+adj[origin][destin] = 1;
+}
+}
+
+Output
+
+Enter number of vertices : 9
+Enter edge 1( -1 -1 to quit ) : 0 1
+Enter edge 2( -1 -1 to quit ) : 0 3
+Enter edge 3( -1 -1 to quit ) : 0 4
+Enter edge 4( -1 -1 to quit ) : 1 2
+Enter edge 5( -1 -1 to quit ) : 1 4
+Enter edge 6( -1 -1 to quit ) : 2 5
+Enter edge 7( -1 -1 to quit ) : 3 4
+Enter edge 8( -1 -1 to quit ) : 3 6
+Enter edge 9( -1 -1 to quit ) : 4 5
+Enter edge 10( -1 -1	to quit ) : 4	7
+Enter edge 11( -1 -1	to quit ) : 6	4
+Enter edge 12( -1	-1	to quit ) : 6	7
+Enter edge 13( -1	-1	to quit ) : 7	8
+Enter edge 14( -1	-1	to quit ) : -1 -1
+Enter Start Vertex for BFS: 0	
+BFS Traversal is : 0	1342657	8
+
+
+
+
+15   DFS on undirected graph 
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#define true 1
+#define false 0
+#define MAX 5
+struct Vertex
+{
+char label;
+int visited;
+};
+int stack[MAX];
+int top = -1;
+struct Vertex* lstVertices[MAX];
+static int adjMatrix[MAX][MAX];
+int vertexCount = 0;
+void push(int item)
+{
+stack[++top] = item;}
+int pop()
+{
+return stack[top--];}
+int peek()
+{
+return stack[top];}
+
+int isStackEmpty()
+{
+return top == -1;}
+void addVertex(char label)
+{
+struct Vertex* vertex = (struct Vertex*) malloc(sizeof(struct Vertex));
+vertex->label = label; 
+vertex->visited = false; lstVertices[vertexCount++] = vertex;
+}
+void addEdge(int start, int end)
+{
+adjMatrix[start][end] = 1;
+adjMatrix[end][start] = 1;}
+void displayVertex(int vertexIndex)
+{
+printf("%c ", lstVertices[vertexIndex]->label);
+}
+int getAdjUnvisitedVertex(int vertexIndex)
+{
+int i;
+for(i = 0; i < vertexCount; i++)
+{
+
+if(adjMatrix[vertexIndex][i] == 1 && lstVertices[i]->visited == false)
+return i;
+}
+return -1;
+}
+void depthFirstSearch()
+{
+int i;
+lstVertices[0]->visited = true;
+displayVertex(0);
+push(0);
+while(!isStackEmpty())
+{
+int unvisitedVertex = getAdjUnvisitedVertex(peek()); if(unvisitedVertex == -1)
+pop();
+else
+{
+lstVertices[unvisitedVertex]->visited = true; displayVertex(unvisitedVertex); push(unvisitedVertex);
+}
+}
+for(i = 0;i < vertexCount;i++) lstVertices[i]->visited = false;
+}
+main()
+{
+int i, j, n, edges, orgn, destn;
+char ch;
+printf("Enter no. of vertices : ");
+scanf("%d", &n);
+edges = n * (n - 1);
+printf("Enter Vertex Labels : \n"); 
+for (i=0; i<n; i++) {
+fflush(stdin);
+scanf("%c", &ch);
+addVertex(ch);
+}
+for(i=0; i<edges; i++)
+{
+printf("Enter edge ( -1 -1 to quit ) : "); scanf("%d %d", &orgn, &destn); 
+if((orgn == -1) && (destn == -1))
+break;
+if(orgn>=n || destn>=n || orgn<0 || destn<0)
+printf("Invalid edge!\n");
+else
+addEdge(orgn, destn);
+}
+printf("\nDepth First Search: ");
+depthFirstSearch();
+}
+
+Output
+Enter no. of vertices : 5
+Enter Vertex Labels :
+S
+A
+B
+C
+D
+Enter edge ( -1 -1 to quit ) : 0 1
+Enter edge ( -1 -1 to quit ) : 0 3
+Enter edge ( -1 -1 to quit ) : 0 2
+Enter edge ( -1 -1 to quit ) : 1 4
+Enter edge ( -1 -1 to quit ) : 2 4
+Enter edge ( -1 -1 to quit ) : 3 4
+Enter edge ( -1 -1 to quit ) : -1 -1
+
+Depth First Search: S A D B C
+
+
+
+16  Dijkstra’s Shortest Path
+
+
+#include <stdio.h>
+#include <conio.h>
+#define INFINITY 9999
+#define MAX 10
+
+void dijkstra(int G[MAX][MAX], int n, int startnode);
+
+main()
+{
+int G[MAX][MAX], i, j, n, u;
+printf("Enter no. of vertices: ");
+scanf("%d", &n);
+printf("Enter the adjacency matrix:\n"); for(i=0; i<n; i++)
+for(j=0; j<n; j++)
+scanf("%d", &G[i][j]);
+printf("Enter the starting node: ");
+scanf("%d", &u);
+dijkstra(G, n, u);
+}
+
+void dijkstra(int G[MAX][MAX], int n,int startnode)
+{
+int cost[MAX][MAX], distance[MAX], pred[MAX];
+int visited[MAX],count, mindistance, nextnode, i, j; for(i=0; i<n; i++)
+for(j=0; j<n; j++)
+if(G[i][j] == 0)
+cost[i][j] = INFINITY;
+else
+cost[i][j] = G[i][j];
+for(i=0; i<n; i++)
+{
+distance[i] = cost[startnode][i];
+pred[i] = startnode;
+visited[i] = 0;
+}
+distance[startnode] = 0;
+visited[startnode] = 1;
+count = 1;
+while(count < n-1)
+{
+mindistance =	INFINITY;	
+for(i=0; i<n;	i++)			
+if(distance[i]	< mindistance && !visited[i])	
+{				
+mindistance = distance[i];
+nextnode=i;
+}
+visited[nextnode] = 1;
+for(i=0; i<n; i++)
+if(!visited[i])
+if(mindistance + cost[nextnode][i] < distance[i])
+{
+distance[i] = mindistance + cost[nextnode][i];
+pred[i] = nextnode;
+}
+count++;
+}
+for(i=0; i<n; i++)
+if(i != startnode)
+{
+
+printf("\nDistance to node%d = %d", i, distance[i]);
+printf("\nPath = %d", i);
+j = i;
+do
+{
+j = pred[j];
+printf("<-%d", j);
+} while(j != startnode);
+}
+}
+
+
+
+
+
+
+
+Output
+
+Enter no. of vertices: 5
+Enter the adjacency matrix:
+0	10	0	30	100
+10	0	500	0
+05002010
+300  200  60
+1000 0600
+
+Enter the starting node: 0 
+Distance to node1 = 10 
+Path = 1<-0
+
+Distance to node2 = 50 
+Path = 2<-3<-0 
+Distance to node3 = 30 
+Path = 3<-0 
+Distance to node4 = 60 
+Path = 4<-2<-3<-0
+
+
+16   Linear search on a sorted array
+
+
+
+#include <stdio.h>
+#include <conio.h>
+
+main()
+{
+int a[50],i, n, val, found;
+clrscr();
+printf("Enter number of elements : "); scanf("%d", &n);
+printf("Enter Array Elements : \n"); for(i=0; i<n; i++)
+scanf("%d", &a[i]);
+printf("Enter element to locate : ");
+scanf("%d", &val);
+found = 0;
+for(i=0; i<n; i++)
+{
+if (a[i] == val)
+{
+printf("Element found at position %d", i);
+found = 1;
+break;
+}
+}
+if (found == 0)
+printf("\n Element not found");
+getch();
+}
+
+
+Output
+
+Enter number of elements : 7
+Enter Array Elements :
+23	6	12	5	0	32	10
+Enter element to locate : 5
+Element found at position 3
+
+
+17  Binary Search on a sorted array
+
+
+#include <stdio.h>
+#include <conio.h>
+main()
+{
+int a[50],i, n, upper, lower, mid, val, found; clrscr();
+printf("Enter array size	: ");
+scanf("%d", &n);
+for(i=0; i<n; i++)
+a[i] = 2 * i;
+printf("\n Elements in Sorted Order \n"); for(i=0; i<n; i++)
+printf("%4d", a[i]);
+printf("\n Enter element to locate : ");
+scanf("%d", &val);
+upper = n;
+lower = 0;
+found = -1;
+while (lower <= upper)
+{
+mid = (upper + lower)/2;
+if (a[mid] == val)
+{
+printf("Located at position %d", mid);
+found = 1;
+break;
+}
+else if(a[mid] > val)
+upper = mid - 1;
+else
+lower = mid + 1;
+}
+if (found == -1)
+printf("Element not found");
+getch();
+}
+
+Output									
+Enter array size	:	9				
+Elements in	Sorted	Order				
+0	2	4	6	8	10	12	14	16	
+Enter	element to	locate : 12			
+Located	at position 6				
+Enter array size	:	10				
+Elements in	Sorted	Order				
+0	2	4	6	8	10	12	14	16	18
+Enter	element to	locate : 13			
+Element	not	found						
+
+
+
+
+18  Bubble Sort
+
+#include <stdio.h>
+#include <conio.h>
+main()
+{
+int a[50],i, j, n, t;
+clrscr();
+printf("Enter number of elements : "); scanf("%d", &n);
+printf("Enter Array Elements \n");
+for(i=0; i<n; i++)
+scanf("%d", &a[i]);
+for(i=0; i<n-1; i++)
+{
+for(j=i+1; j<n; j++)
+{
+if (a[i] > a[j])
+{
+t = a[i];
+a[i] = a[j];
+a[j] = t;
+}}}
+printf("\n Elements in Sorted order :"); for(i=0; i<n; i++)
+printf("%d	", a[i]);
+getch();
+}
+
+
+
+
+
+
+
+Output
+
+Enter number of elements : 5
+Enter Array Elements 37-902
+Elements in Sorted order :	
+-9	0	2	3	7
+
+
+18  sort an array of N numbers using Quick sort.
+
+
+#include <stdio.h>
+#include <conio.h>
+
+void qsort(int arr[20], int fst, int last);
+
+main()
+{
+int arr[30];
+int i, size;
+
+printf("Enter total no. of the elements : "); scanf("%d", &size);
+
+printf("Enter total %d elements : \n", size); for(i=0; i<size; i++)
+scanf("%d", &arr[i]);
+qsort(arr,0,size-1);
+
+printf("\n Quick sorted elements \n"); for(i=0; i<size; i++)
+printf("%d\t", arr[i]);
+getch();
+}
+
+void qsort(int arr[20], int fst, int last)
+{
+int i, j, pivot, tmp;
+if(fst < last)
+{
+pivot = fst;
+i = fst;
+j = last;
+while(i < j)
+{
+while(arr[i] <=arr[pivot] && i<last)
+i++;
+while(arr[j] > arr[pivot])
+j--;
+if(i <j )
+{
+tmp = arr[i];
+arr[i] = arr[j];
+arr[j] = tmp;
+}
+}
+tmp = arr[pivot];
+arr[pivot] = arr[j];
+arr[j] = tmp;
+qsort(arr, fst, j-1);
+qsort(arr, j+1, last);
+
+}
+}
+
+
+Output
+
+Enter total no. of the elements : 8
+Enter total 8 elements :
+1
+2
+7
+-1
+0
+4
+-2
+3
+
+Quick sorted elements					
+-2	-1	0	1	2	3	4	7
+
+
+
+
+19  sort an array of N numbers using Merge sort.
+
+
+
+#include <stdio.h>
+#include <conio.h>
+void merge(int [],int ,int ,int );
+void part(int [],int ,int );
+int size;
+main()
+{
+int i, arr[30];
+
+printf("Enter total no. of elements : "); scanf("%d", &size);
+printf("Enter array elements : ");
+for(i=0; i<size; i++)
+scanf("%d", &arr[i]);
+part(arr, 0, size-1);
+printf("\n Merge sorted list : ");
+for(i=0; i<size; i++)
+printf("%d ",arr[i]);
+getch();
+}
+void part(int arr[], int min, int max)
+{
+int i, mid;
+if(min < max)
+{
+mid = (min + max) / 2;
+part(arr, min, mid);
+part(arr, mid+1, max);
+merge(arr, min, mid, max);
+}
+if (max-min == (size/2)-1)
+{
+printf("\n Half sorted list : ");
+for(i=min; i<=max; i++)
+printf("%d ", arr[i]);
+}}
+void merge(int arr[],int min,int mid,int max)
+{
+int	tmp[30];
+int	i, j, k, m;
+j	=	min;
+m	=	mid + 1;
+for(i=min; j<=mid && m<=max; i++)
+{
+if(arr[j] <= arr[m])
+{
+tmp[i] = arr[j];
+j++;
+}
+else
+{
+tmp[i] = arr[m];
+m++;
+}}
+if(j > mid)
+{
+for(k=m; k<=max; k++)
+{
+tmp[i] = arr[k];
+i++;
+}}
+else
+{
+for(k=j; k<=mid; k++)
+{
+tmp[i] = arr[k];
+i++;
+}}
+for(k=min; k<=max; k++)
+arr[k] = tmp[k];
+}
+
+Output
+
+Enter total no. of elements : 8
+Enter array elements : 24 13 26 1 2 27 38 15
+
+Half sorted list : 1 13 24 26
+Half sorted list : 2 15 27 38
+Merge sorted list : 1 2 13 15 24 26 27 38
+
+
+20  sort an array of N numbers using Insertion sort.
+
+main()
+{
+int i, j, k, n, temp, a[20], p=0;
+
+printf("Enter total elements: ");
+scanf("%d",&n);
+printf("Enter array elements: ");
+for(i=0; i<n; i++)
+scanf("%d", &a[i]);
+
+for(i=1; i<n; i++)
+{
+temp = a[i];
+j = i - 1;
+while((temp<a[j]) && (j>=0))
+{
+a[j+1] = a[j];
+j = j - 1;
+}
+a[j+1] = temp;
+
+p++;
+printf("\n After Pass %d: ", p);
+for(k=0; k<n; k++)
+printf("	%d", a[k]);
+}
+
+printf("\n Sorted List : ");
+for(i=0; i<n; i++)
+printf(" %d", a[i]);
+}
+
+
+
+Output							
+Enter total	elements: 6				
+Enter array	elements: 34 8 64 51 32 21
+After Pass	1:	8	34	64	51	32	21
+After Pass	2:	8	34	64	51	32	21
+After Pass	3:	8	34	51	64	32	21
+After Pass	4:	8	32	34	51	64	21
+After Pass	5:	8	21	32	34	51	64
+Sorted List :	8213234	51 64		
+
+
+21 implement hash table using a C program.
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 10
+
+main()
+{
+int a[MAX], num, key, i;
+char ans;
+int create(int);
+void linearprobing(int[], int, int); void display(int[]);
+printf("\nCollision handling by linear probing\n\n"); for(i=0; i<MAX; i++)
+a[i] = -1;
+do
+{
+printf("\n Enter number:");
+scanf("%d", &num);
+key = create(num);
+linearprobing(a, key, num);
+printf("\nwish to continue?(y/n):");
+ans = getch();
+} while( ans == 'y'); display(a);
+}
+int create(int num)
+{
+int key;
+key = num % 10;
+return key;
+}
+
+void linearprobing(int a[MAX], int key, int num)
+{
+int flag, i, count = 0;
+void display(int a[]);
+flag = 0;
+if(a[key] == -1)
+a[key] = num;
+else
+{
+i=0;
+while(i < MAX)
+{
+if(a[i] != -1)
+count++;
+i++;
+}
+if(count == MAX)
+{
+printf("hash table is full");
+display(a);
+getch();
+exit(1);
+}
+for(i=key+1; i<MAX; i++)
+if(a[i] == -1)
+{
+a[i] = num;
+flag = 1;
+break;
+}
+for(i=0; i<key && flag==0; i++ )
+if(a[i] == -1)
+{
+a[i] = num;
+flag = 1;
+break;
+}
+}
+}
+
+void display(int a[MAX])
+{
+int i;
+printf("\n Hash table is:");
+for(i=0; i<MAX; i++)
+printf("\n %d\t\t%d",i,a[i]);
+}
+
+Output
+
+Collision handling by linear probing
+Enter number:1
+wish to continue?(y/n):y
+Enter number:26
+wish to continue?(y/n):y
+Enter number:62
+wish to continue?(y/n):y
+Enter number:93
+wish to continue?(y/n):y
+Enter number:84
+wish to continue?(y/n):y
+Enter number:15
+wish to continue?(y/n):y
+Enter number:76
+wish to continue?(y/n):y
+Enter number:98
+wish to continue?(y/n):y
+Enter number:26
+wish to continue?(y/n):y
+Enter number:199
+wish to continue?(y/n):y
+Enter number:1234
+wish to continue?(y/n):y
+Enter number:5678
+hash table is full
+Hash table is:	
+0	1234
+1	1
+2	62
+3	93
+4	84
+5	15
+6	26
+7	76
+8	98
+9	199
+
+
